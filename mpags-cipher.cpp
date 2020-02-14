@@ -1,20 +1,18 @@
 #include <iostream>
 #include <cctype>
+#include <vector>
 
-int main (){
-std::cout << "Input desired characters. When you wish to stop input 'q'" << std::endl;
-char in_char;
-std::string input{""};
-std::string discard{""};
-
-while(std::cin >> in_char && in_char != 'q')
-
-{
+//Transform function stored here
+std::string transformChar(const char in_char) {
+std::string input;
+std::string discard;
+	
+	
 	//Check if alpha and conver to uppercase
 
 	if(isalpha(in_char)) {
-	in_char=toupper(in_char);
-	input = input + in_char;}
+	char upper_char {toupper(in_char)};
+	input = input + upper_char;}
 
 	else {
 	discard = discard + in_char;}
@@ -61,14 +59,37 @@ while(std::cin >> in_char && in_char != 'q')
 
 	default:
 	break;
+	}
+	return input;};
+
+
+int main (int argc, char* argv[]) 
+{
+
+	//Checking arguments etc
+	const std::vector<std::string> cmdLineArgs{argv, argv+argc};
+	for(size_t i{0}; i < cmdLineArgs.size(); i++) {
+	std::cout << "Index: " << i << " " << cmdLineArgs[i] <<std::endl; 
+	}
+
+
+//Function transform
+std::cout << "Input desired characters. When you wish to stop input 'q'" << std::endl;
+char new_char;
+std::string text;
+
+while(std::cin >> new_char && new_char != 'q')
+
+{
+	text += transformChar(new_char);
+	// the above code is the same as text = text + input;
 
 }
 
-}
 
 	// Print
 
-	std::cout << input << std::endl;
+	std::cout << text << std::endl;
 }
 
 
